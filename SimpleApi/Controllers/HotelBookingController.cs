@@ -5,7 +5,7 @@ using SimpleApi.Data;
 
 namespace SimpleApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class HotelBookingController : ControllerBase
     {
@@ -61,6 +61,14 @@ namespace SimpleApi.Controllers
             _context.SaveChanges();
 
             return NoContent();
+        }
+
+        [HttpGet()]
+        public IActionResult GetAll()
+        {
+            var result = _context.Bookings.ToList();
+
+            return Ok(result);
         }
     }
 }
