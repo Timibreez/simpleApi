@@ -3,7 +3,7 @@
     public class HotelBooking
     {
         public int Id { get; set; }
-        public int roomNumber { get; set; }
-        public string? clientName { get; set; }
+        public int RoomNumber { get; set; }
+        public string? ClientName { get; set; }
     }
 }
