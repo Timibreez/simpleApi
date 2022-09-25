@@ -27,7 +27,7 @@ namespace SimpleApi.Controllers
                 var bookingInDb = _context.Bookings.Find(booking.Id);
 
                 if(bookingInDb == null)
-                    return new JsonResult(NotFound());
+                    return NotFound();
 
                 bookingInDb = booking;
             }
@@ -37,15 +37,30 @@ namespace SimpleApi.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetBooking(int id)
+        public IActionResult GetBooking(int id)
         {
             var result = _context.Bookings.Find(id);
 
             if (result == null)
             {
-                return new JsonResult(NotFound());
+                return NotFound();
             }
-            return new JsonResult(Ok(result));
+            return Ok(result);
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var result = _context.Bookings.Find(id);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+            _context.Bookings.Remove(result);
+            _context.SaveChanges();
+
+            return NoContent();
         }
     }
 }
